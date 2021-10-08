@@ -1,7 +1,7 @@
 ﻿
 namespace _4.hét
 {
-    partial class Form1
+    partial class Form2
     {
         /// <summary>
         /// Required designer variable.

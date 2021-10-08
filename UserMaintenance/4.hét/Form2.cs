@@ -12,21 +12,21 @@ using System.Reflection;
 
 namespace _4.hét
 {
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
         RealEstateEntities context = new RealEstateEntities();
         List<Flat> Flats;
 
-        Excel.Application xlApp; 
-        Excel.Workbook xlWB; 
+        Excel.Application xlApp;
+        Excel.Workbook xlWB;
         Excel.Worksheet xlSheet;
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
             LoadData();
             CreateExcel();
             CreateTable();
-            
+
         }
 
         private string GetCell(int x, int y)
@@ -59,7 +59,7 @@ namespace _4.hét
              "Ár (mFt)",
              "Négyzetméter ár (Ft/m2)"};
 
-            for (int i = 0; i< headers.Length; i++)
+            for (int i = 0; i < headers.Length; i++)
             {
                 xlSheet.Cells[1, i + 1] = headers[i];
 
@@ -123,19 +123,19 @@ namespace _4.hét
                 xlWB = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWB.ActiveSheet;
 
-               
-                CreateTable(); 
 
-                
+                CreateTable();
+
+
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
                 MessageBox.Show(errMsg, "Error");
 
-                
+
                 xlWB.Close(false, Type.Missing, Type.Missing);
                 xlApp.Quit();
                 xlWB = null;
@@ -149,3 +149,4 @@ namespace _4.hét
         }
 
     }
+}
