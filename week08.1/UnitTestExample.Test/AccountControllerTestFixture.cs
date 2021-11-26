@@ -97,6 +97,7 @@ namespace UnitTestExample.Test
 
                [
                 Test,
+
                 TestCase("irf@uni-corvinus.hu", "Abcd1234")
                ]
 
