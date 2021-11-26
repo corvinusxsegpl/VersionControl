@@ -16,7 +16,9 @@ namespace UnitTestExample.Test
                TestCase("abcd1234", false),
                TestCase("irf@uni-corvinus", false),
                TestCase("irf.uni-corvinus.hu", false),
-               TestCase("irf@uni-corvinus.hu", true)
+               TestCase("irf@uni-corvinus.hu", true),
+                TestCase("irf@uni-corvinus.hu", "Abcd1234"),
+                TestCase("irf@uni-corvinus.hu", "Abcd1234567"),
         ]
         public void TestValidateEmail(string email, bool expectedResult)
         {
@@ -39,6 +41,18 @@ namespace UnitTestExample.Test
             var hasNumber = new Regex(@"[0-9]+");
             var isEightLong = new Regex(@".{8,}");
             return hasLowercase.IsMatch(password) && hasUppercase.IsMatch(password) && hasNumber.IsMatch(password) && isEightLong.IsMatch(password);
+        }
+        public void TestRegisterHappyPath(string email, string password)
+        {
+            var accountController = new AccountController();
+
+            // Act
+            var actualResult = accountController.Register(email, password);
+
+            // Assert
+            Assert.AreEqual(email, actualResult.Email);
+            Assert.AreEqual(password, actualResult.Password);
+            Assert.AreNotEqual(Guid.Empty, actualResult.ID);
         }
     }
 }
