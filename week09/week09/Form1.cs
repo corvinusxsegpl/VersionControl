@@ -116,5 +116,30 @@ namespace week09
                 }
             }
         }
+
+        private void DisplayResults()
+        {
+            for (int year = 2005; year < numericUpDown1.Value; year++)
+            {
+                int i = 0;
+                richTextBox1.Text += "Szimulációs év:" + year + "\n\t Fiúk:" + MalePop[i] + "\n\t Lányok:" + FemalePop[i] + "\n\n";
+                i++;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog()==DialogResult.OK)
+            {
+                textBox1.Text = openFile.FileName;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Simulation();
+            DisplayResults();
+        }
     }
 }
