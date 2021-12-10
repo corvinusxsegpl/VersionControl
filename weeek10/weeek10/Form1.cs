@@ -15,7 +15,7 @@ namespace weeek10
     {
         GameController gc = new GameController();
         GameArea ga;
-
+        Brain winnerBrain = null;
         public Form1()
         {
             InitializeComponent();
@@ -55,6 +55,17 @@ namespace weeek10
                 else
                     gc.AddPlayer(b.Mutate());
             }
+
+            var winners = from p in topPerformers
+                          where p.IsWinner
+                          select p;
+            if (winners.Count() > 0)
+            {
+                winnerBrain = winners.FirstOrDefault().Brain.Clone();
+                gc.GameOver -= Gc_GameOver;
+                return;
+            }
+
             gc.Start();
         }
 
@@ -62,5 +73,14 @@ namespace weeek10
         int nbrOfSteps = 10;
         int nbrOfStepsIncrement = 10;
         int generation = 1;
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gc.ResetCurrentLevel();
+            gc.AddPlayer(winnerBrain.Clone());
+            gc.AddPlayer();
+            ga.Focus();
+            gc.Start(true);
+        }
     }
 }
